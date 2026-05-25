@@ -1,28 +1,28 @@
 {
   "short_name": "MindFlow",
-  "name": "MindFlow - Gamified Sensory Focus Workspace",
-  "description": "A premium ADHD-aware focus workspace with ambient soundscapes, a growing garden, and a built-in AI coach.",
+  "name": "MindFlow — Focus Without the Noise",
+  "description": "A premium ADHD-aware focus workspace with ambient soundscapes, a growing garden, and a built-in AI coach. Free. No account needed.",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "/favicon.svg",
       "type": "image/svg+xml",
       "sizes": "any",
       "purpose": "any"
     },
     {
-      "src": "icon-192.png",
+      "src": "/icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
