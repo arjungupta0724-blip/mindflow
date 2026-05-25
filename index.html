@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- PWA Configurations -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="MindFlow" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- SEO and Social Metadata -->
+    <title>MindFlow — Focus Without the Noise</title>
+    <meta name="description" content="A premium ADHD-aware focus workspace with ambient soundscapes, a growing garden, and a built-in AI coach. Free. No account needed." />
+    <meta name="keywords" content="ADHD productivity, gamified tasks, sensory-friendly, local-first planner, dopamine-driven workspace, task breaker, lo-fi timer" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mindflow-app.vercel.app" />
+    <meta property="og:title" content="MindFlow — Focus Without the Noise" />
+    <meta property="og:description" content="A premium ADHD-aware focus workspace with ambient soundscapes, a growing garden, and a built-in AI coach. Free. No account needed." />
+    <meta property="og:image" content="/og-preview.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://mindflow-app.vercel.app" />
+    <meta name="twitter:title" content="MindFlow — Focus Without the Noise" />
+    <meta name="twitter:description" content="A premium ADHD-aware focus workspace with ambient soundscapes, a growing garden, and a built-in AI coach. Free. No account needed." />
+    <meta name="twitter:image" content="/og-preview.png" />
+    
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Register PWA Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('MindFlow Service Worker active!'))
+            .catch((err) => console.warn('Service Worker registration failed:', err));
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
