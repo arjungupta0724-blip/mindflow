@@ -88,18 +88,18 @@ export default function FocusRoom({
       ablyChannelRef.current = channel;
 
       channel.presence.subscribe(() => {
-        channel.presence.get((err, members) => {
-          if (!err && members) {
-            setPresenceCount(members.length);
-          }
-        });
+        channel.presence.get()
+          .then((members) => {
+            if (members) setPresenceCount(members.length);
+          })
+          .catch((err) => console.warn("Presence update fetch error:", err));
       });
 
-      channel.presence.get((err, members) => {
-        if (!err && members) {
-          setPresenceCount(members.length);
-        }
-      });
+      channel.presence.get()
+        .then((members) => {
+          if (members) setPresenceCount(members.length);
+        })
+        .catch((err) => console.warn("Initial presence fetch error:", err));
     } catch (e) {
       console.warn("Presence connection failed:", e);
       setAblyConnected(false);
@@ -123,23 +123,19 @@ export default function FocusRoom({
     const channel = ablyChannelRef.current;
     if (channel && ablyConnected) {
       if (timerRunning) {
-        channel.presence.enter('focusing', (err) => {
-          if (!err) {
-            channel.presence.get((err2, members) => {
-              if (!err2 && members) {
-                setPresenceCount(members.length);
-              }
-            });
-          }
-        });
+        channel.presence.enter('focusing')
+          .then(() => channel.presence.get())
+          .then((members) => {
+            if (members) setPresenceCount(members.length);
+          })
+          .catch((err) => console.warn("Error entering presence:", err));
       } else {
-        channel.presence.leave(() => {
-          channel.presence.get((err2, members) => {
-            if (!err2 && members) {
-              setPresenceCount(members.length);
-            }
-          });
-        });
+        channel.presence.leave()
+          .then(() => channel.presence.get())
+          .then((members) => {
+            if (members) setPresenceCount(members.length);
+          })
+          .catch((err) => console.warn("Error leaving presence:", err));
       }
     }
   }, [timerRunning, ablyConnected]);
