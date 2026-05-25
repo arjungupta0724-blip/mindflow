@@ -74,6 +74,10 @@ export default function FocusRoom({
       });
       ablyClientRef.current = client;
 
+      if (client.connection.state === 'connected') {
+        setAblyConnected(true);
+      }
+
       client.connection.on('connected', () => {
         setAblyConnected(true);
       });
