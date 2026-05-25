@@ -69,7 +69,7 @@ export default function FocusRoom({
     let channel = null;
     try {
       client = new Ably.Realtime({
-        key: 'o9qQig.gH60VA:LgZ2K5T0eKpx9L_F6QWw_9H-F97wP_cPlf6F1LgU4XQ',
+        key: 'RjUi5g.dm-t3A:4tBd5n-3RgndmwUthvMj2LFkEfg1MAIp2drGTopEp1k',
         clientId: 'user_' + Math.random().toString(36).substring(2, 9)
       });
       ablyClientRef.current = client;
