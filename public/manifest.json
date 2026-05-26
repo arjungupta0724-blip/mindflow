@@ -2,36 +2,163 @@
   "short_name": "MindFlow",
   "name": "MindFlow — Focus Without the Noise",
   "description": "A premium ADHD-aware focus workspace with ambient soundscapes, a growing garden, and a built-in AI coach. Free. No account needed.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "iarc_rating_id": "e843813e-f14b-4bbf-85f0-8c292f7f9b8c",
+  "theme_color": "#0a0a0f",
+  "background_color": "#0a0a0f",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait-primary",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
   "icons": [
     {
-      "src": "/favicon.svg",
-      "type": "image/svg+xml",
-      "sizes": "any",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-192.png",
+      "src": "icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.png",
+      "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
     }
   ],
-  "start_url": "/",
-  "background_color": "#0a0a0f",
-  "theme_color": "#0a0a0f",
-  "display": "standalone",
-  "orientation": "portrait-primary",
-  "categories": ["productivity", "utilities"]
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MindFlow Premium ADHD-Aware Desktop Workspace"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MindFlow Premium ADHD-Aware Mobile Companion"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Timer",
+      "short_name": "Start Focus",
+      "description": "Instantly start a 25-minute focus session",
+      "url": "/?action=start-focus",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Task Planner",
+      "short_name": "Tasks",
+      "description": "View and plan your current brain dump tasks",
+      "url": "/?action=tasks",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/?action=import-backup",
+      "accept": {
+        "application/json": [
+          ".json"
+        ]
+      },
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ],
+      "launch_type": "single-client"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "focus-existing",
+      "auto"
+    ]
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+mindflow",
+      "url": "/?uri=%s"
+    }
+  ],
+  "share_target": {
+    "action": "/?action=share-dump",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "widgets": [
+    {
+      "name": "Focus State",
+      "short_name": "Focus",
+      "description": "View current focus timer status",
+      "tag": "timer-widget",
+      "template": "timer-widget",
+      "ms_ac_template": "widget-template.json",
+      "data": "widget-data.json",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "screenshot-mobile.png",
+          "sizes": "1024x1024",
+          "type": "image/png",
+          "label": "Mobile Widget Preview"
+        }
+      ]
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "scope_extensions": [
+    {
+      "origin": "*.vercel.app"
+    },
+    {
+      "origin": "*.mindflow.app"
+    }
+  ]
 }
