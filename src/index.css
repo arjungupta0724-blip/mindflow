@@ -355,3 +355,33 @@ h1, h2, h3, h4, .outfit-font {
     gap: 16px;
   }
 }
+
+/* FIX 2: Overwhelmed floating pill pulse animation */
+@keyframes overwhelmedPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(255, 94, 98, 0.15), 0 0 0 0 rgba(255, 94, 98, 0); }
+  50% { box-shadow: 0 4px 20px rgba(255, 94, 98, 0.25), 0 0 0 6px rgba(255, 94, 98, 0.05); }
+}
+
+/* FIX 3: Level 1 seedling breathing sway animation */
+.plant-breathe-stage {
+  transform-origin: bottom center;
+  animation: plantBreathe 4s infinite ease-in-out;
+}
+
+@keyframes plantBreathe {
+  0% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2.5deg); }
+  100% { transform: rotate(-2.5deg); }
+}
+
+/* FIX 25: Chevron bounce animation for "See how it works" */
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Spin animation utility */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

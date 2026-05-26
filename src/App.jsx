@@ -622,13 +622,13 @@ export default function App() {
             <p style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.4 }}>Help shape MindFlow. Pick a feedback category to compose an email directly to Anti-Gravity developers:</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {[
-                { label: '👍 This works great', subject: 'Praise' },
-                { label: "🐛 Something's broken", subject: 'Bug Report' },
-                { label: '💡 I have an idea', subject: 'Feature Idea' }
+                { label: '👍 This works great', subject: 'Praise', body: 'What I love about MindFlow: [tell us here]' },
+                { label: "🐛 Something's broken", subject: 'Bug Report', body: 'What happened: [describe the bug]%0AWhich screen: [which part of the app]%0ADevice: [your device]' },
+                { label: '💡 I have an idea', subject: 'Feature Idea', body: 'My idea: [describe it here]%0AWhy it would help me: [explain here]' }
               ].map((opt) => (
                 <a 
                   key={opt.subject}
-                  href={`mailto:developer@mindflow.app?subject=[MindFlow Feedback] ${opt.subject}&body=Type your feedback details here...`}
+                  href={`mailto:developer@mindflow.app?subject=[MindFlow Feedback] ${opt.subject}&body=${opt.body}`}
                   onClick={() => setShowFeedback(false)}
                   className="sensory-button-secondary text-center"
                   style={{ textDecoration: 'none', display: 'block', padding: '10px 8px', fontSize: '13px' }}
@@ -950,13 +950,7 @@ export default function App() {
                 <span>Shortcuts</span>
               </button>
 
-              <button
-                onClick={() => { playClick(); triggerProGating("ADHD Crisis Mode take-over"); }}
-                className="sensory-button-secondary"
-                style={{ padding: '6px 10px', color: '#ff5e62', borderColor: 'rgba(255,94,98,0.15)', fontSize: '10px', borderRadius: '8px' }}
-              >
-                🚨 Overwhelmed?
-              </button>
+
             </div>
 
           </aside>
@@ -1095,6 +1089,38 @@ export default function App() {
           <MessageSquare size={18} />
         </button>
       )}
+
+      {/* FIX 2: Floating "I'm Overwhelmed" pill button — always visible */}
+      <button
+        onClick={() => { playClick(); triggerProGating("ADHD Crisis Mode take-over"); }}
+        className="overwhelmed-float-btn"
+        style={{
+          position: 'fixed',
+          bottom: '28px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 2000,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '7px',
+          padding: '10px 22px',
+          borderRadius: '99px',
+          border: '1px solid rgba(255, 94, 98, 0.28)',
+          backgroundColor: 'rgba(15, 10, 12, 0.85)',
+          backdropFilter: 'blur(16px)',
+          color: '#ff7b7e',
+          fontSize: '13px',
+          fontWeight: '600',
+          cursor: 'pointer',
+          boxShadow: '0 4px 20px rgba(255, 94, 98, 0.15)',
+          fontFamily: "'Outfit', sans-serif",
+          animation: 'overwhelmedPulse 4s infinite ease-in-out'
+        }}
+        title="Feeling overwhelmed? Get help."
+      >
+        <span style={{ fontSize: '15px' }}>🌊</span>
+        I'm Overwhelmed
+      </button>
 
     </div>
   );

@@ -68,6 +68,11 @@ export default function BrainDump({ addTask }) {
         Got a random idea or a distracting thought? Dump it here immediately to keep your focus. Parse it into structured tasks whenever you are ready!
       </p>
 
+      {/* FIX 23: Warm in-context subheading */}
+      <p style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5, opacity: 0.7, marginTop: '-8px' }}>
+        A thought enters your head mid-session. Type it here in 3 seconds and forget it. Come back to it when you're ready.
+      </p>
+
       {/* Single-line borderless Search Bar */}
       {lines.length > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid var(--panel-border)', paddingBottom: '8px', marginTop: '4px' }}>

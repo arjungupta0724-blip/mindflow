@@ -73,9 +73,24 @@ export default function Dashboard({
           {/* Soil */}
           <ellipse cx="100" cy="122" rx="38" ry="6" fill="#5c4033" />
 
-          {/* LEVEL 1: Seedling Sprout */}
+          {/* LEVEL 1: Large Seedling - clearly visible round seed + tall white sprout from dark soil */}
           {lvl === 1 && (
-            <path d="M100,120 Q105,105 102,98 Q98,108 100,120 Z" fill={stemColor} className="plant-grow-stage" />
+            <g className="plant-breathe-stage">
+              {/* Dark soil mound that seed sits in */}
+              <ellipse cx="100" cy="122" rx="20" ry="5" fill="#3e2a18" />
+              {/* Seed body - round seed nestled in soil, clearly visible */}
+              <ellipse cx="100" cy="119" rx="12" ry="10" fill="#7d5a38" />
+              {/* Seed texture highlight */}
+              <ellipse cx="96" cy="115" rx="4" ry="3" fill="#a07848" opacity="0.7" />
+              {/* Main tall white sprout emerging from seed upward */}
+              <path d="M100,109 C100,95 97,72 100,45" stroke="#ffffff" strokeWidth="3.5" fill="none" strokeLinecap="round" opacity="0.92" />
+              {/* Left tiny leaf at mid-sprout height */}
+              <path d="M100,80 C94,74 86,76 88,83 C93,82 98,80 100,80 Z" fill="#b8f0a0" opacity="0.85" />
+              {/* Right tiny leaf at top of sprout */}
+              <path d="M100,55 C106,48 116,50 114,58 C109,57 103,55 100,55 Z" fill="#c8f5b0" opacity="0.9" />
+              {/* Tiny sprout tip curl */}
+              <circle cx="100" cy="44" r="4" fill="#d8ffc0" opacity="0.75" />
+            </g>
           )}
 
           {/* LEVEL 2: Simple Sprout */}
@@ -461,7 +476,7 @@ export default function Dashboard({
         {/* Level XP Bar */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
-            <span style={{ color: 'var(--text-secondary)' }}>Energy to Grow Spores</span>
+            <span style={{ color: 'var(--text-secondary)' }}>Energy to Next Level</span>
             <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{currentXpInLevel} / {xpNeededForNext} XP</span>
           </div>
           <div style={{ height: '10px', width: '100%', backgroundColor: 'var(--xp-bar-bg)', borderRadius: '99px', overflow: 'hidden', padding: '1px' }}>
@@ -499,7 +514,7 @@ export default function Dashboard({
         <div className="glass-panel" style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Flame size={16} style={{ color: '#ff5e62' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Active Streak</span>
+            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Day Streak 🔥</span>
             <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>{streak} Days</span>
           </div>
         </div>
@@ -507,7 +522,7 @@ export default function Dashboard({
         <div className="glass-panel" style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Hourglass size={16} style={{ color: 'var(--accent)' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Focus Blocks</span>
+            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Sessions Done 📚</span>
             <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>{stats.focusCompleted}</span>
           </div>
         </div>
@@ -515,7 +530,7 @@ export default function Dashboard({
         <div className="glass-panel" style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <CheckCircle size={16} style={{ color: '#4caf50' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Tasks Swept</span>
+            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Thoughts Cleared 🧹</span>
             <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>{stats.tasksCompleted}</span>
           </div>
         </div>
