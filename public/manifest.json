@@ -13,6 +13,7 @@
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
+    "tabbed",
     "standalone",
     "minimal-ui"
   ],
@@ -78,7 +79,8 @@
       "icons": [
         {
           "src": "icon-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     },
@@ -90,7 +92,8 @@
       "icons": [
         {
           "src": "icon-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ]
     }
@@ -109,7 +112,8 @@
       "icons": [
         {
           "src": "icon-192.png",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/png"
         }
       ],
       "launch_type": "single-client"
@@ -168,9 +172,11 @@
   },
   "scope_extensions": [
     {
+      "type": "origin",
       "origin": "https://mindflow-silk.vercel.app"
     },
     {
+      "type": "origin",
       "origin": "https://mindflow.app"
     }
   ]

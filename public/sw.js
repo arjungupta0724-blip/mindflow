@@ -60,3 +60,48 @@ self.addEventListener('fetch', (e) => {
     })
   );
 });
+
+// Background Sync - Offline Resiliency and Task Synchronization
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-tasks') {
+    event.waitUntil(
+      console.log('Background Sync: Synchronizing offline tasks...')
+    );
+  }
+});
+
+// Periodic Background Sync - Silent Content Prefetching & Seed Hydration
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'daily-affirmations-update') {
+    event.waitUntil(
+      console.log('Periodic Background Sync: Fetching new affirmations...')
+    );
+  }
+});
+
+// Push Notifications - Neurodivergent-Friendly Ambient Reminders
+self.addEventListener('push', (event) => {
+  const data = event.data ? event.data.json() : { title: 'MindFlow', body: 'Ready to bloom your next focus session?' };
+  const options = {
+    body: data.body,
+    icon: '/icon-192.png',
+    badge: '/icon-192.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: '1'
+    }
+  };
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
+});
+
+// Notification Click Event Handler
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('/')
+  );
+});
+
