@@ -336,8 +336,8 @@ h1, h2, h3, h4, .outfit-font {
   100% { transform: scale(1.05); opacity: 0; }
 }
 
-/* Mobile viewport scaling */
-@media (max-width: 900px) {
+/* Mobile viewport scaling — stacked layout for tablets 768-900px */
+@media (max-width: 900px) and (min-width: 769px) {
   .app-container {
     flex-direction: column;
     padding: 12px;
@@ -353,6 +353,102 @@ h1, h2, h3, h4, .outfit-font {
 
   .main-content {
     gap: 16px;
+  }
+}
+
+/* ========================================== */
+/* FIX 1: MOBILE BOTTOM TAB BAR (<768px)      */
+/* ========================================== */
+
+@media (max-width: 768px) {
+  /* Hide the desktop sidebar entirely on mobile */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* App container becomes a single-column full-screen layout */
+  .app-container {
+    flex-direction: column;
+    padding: 12px 12px 80px 12px; /* Bottom padding for the tab bar */
+    gap: 12px;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    gap: 12px;
+    flex: 1;
+  }
+
+  /* The mobile tab bar itself */
+  .mobile-tab-bar {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3000;
+    background: var(--panel-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid var(--panel-border);
+    padding: 6px 8px;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .mobile-tab-bar button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 6px 2px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-tab-bar button .tab-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .mobile-tab-bar button .tab-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-family: 'Outfit', sans-serif;
+    white-space: nowrap;
+  }
+
+  .mobile-tab-bar button.tab-inactive .tab-icon {
+    opacity: 0.45;
+  }
+  .mobile-tab-bar button.tab-inactive .tab-label {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .mobile-tab-bar button.tab-active {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .mobile-tab-bar button.tab-active .tab-icon {
+    opacity: 1;
+  }
+  .mobile-tab-bar button.tab-active .tab-label {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Move floating buttons above the tab bar */
+  .overwhelmed-float-btn {
+    bottom: 76px !important;
   }
 }
 

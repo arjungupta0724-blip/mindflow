@@ -1067,6 +1067,35 @@ export default function App() {
 
       </div>
 
+      {/* ========================================== */}
+      {/* FIX 1: MOBILE BOTTOM TAB BAR              */}
+      {/* Hidden on desktop (display:none default),  */}
+      {/* shown on mobile via CSS media query.       */}
+      {/* ========================================== */}
+      {!timerRunning && (
+        <nav className="mobile-tab-bar" style={{ display: 'none' }}>
+          {[
+            { id: 'focus', icon: '🌊', label: 'Focus' },
+            { id: 'dump', icon: '🧠', label: 'Dump' },
+            { id: 'tasks', icon: '📋', label: 'Tasks' },
+            { id: 'garden', icon: '🏡', label: 'Garden' },
+            { id: 'theme', icon: '⚙️', label: 'Settings' }
+          ].map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => { setActiveTab(tab.id); playClick(); }}
+                className={isActive ? 'tab-active' : 'tab-inactive'}
+              >
+                <span className="tab-icon">{tab.icon}</span>
+                <span className="tab-label">{tab.label}</span>
+              </button>
+            );
+          })}
+        </nav>
+      )}
+
       {/* Floating Ghost Feedback Speech Bubble Button */}
       {!timerRunning && (
         <button
