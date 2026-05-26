@@ -58,8 +58,8 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
     if (!newTaskText.trim()) return;
 
     // Free Tier Cap Check
-    if (!isPro && tasks.length >= 10) {
-      triggerProModal("Task Board limit beyond 10 tasks");
+    if (!isPro && tasks.length >= 20) {
+      triggerProModal("Task Board limit beyond 20 tasks");
       return;
     }
 
@@ -230,7 +230,7 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
 
   const columns = [
     { id: 'todo', title: 'Inbox / Ideas', desc: 'Capture thoughts first' },
-    { id: 'active', title: 'Active Flow', desc: 'Focus Zone (Max 3)', isCap: true },
+    { id: 'active', title: 'In Progress', desc: 'Up to 3 active tasks', isCap: true },
     { id: 'done', title: 'Accomplished', desc: 'Dopamine Bank' }
   ];
 
@@ -327,10 +327,29 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
                     fontSize: '13px', 
                     backgroundColor: isFull ? 'rgba(255, 230, 0, 0.15)' : 'rgba(255,255,255,0.05)',
                     color: isFull ? 'var(--accent-secondary)' : 'var(--text-primary)',
-                    border: '1px solid rgba(255,255,255,0.03)'
+                    border: '1px solid rgba(255,255,255,0.03)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
                   }}
                 >
-                  {colTasks.length} {col.isCap && '/ 3'}
+                  {col.isCap ? (
+                    // FIX 8: Replace "0/3" counter with 3 dot indicators
+                    [0, 1, 2].map(dotIdx => (
+                      <span key={dotIdx} style={{
+                        width: '7px',
+                        height: '7px',
+                        borderRadius: '50%',
+                        backgroundColor: dotIdx < colTasks.length 
+                          ? (isFull ? 'var(--accent-secondary)' : 'var(--accent)')
+                          : 'rgba(255,255,255,0.15)',
+                        display: 'inline-block',
+                        transition: 'background-color 0.3s'
+                      }} />
+                    ))
+                  ) : (
+                    colTasks.length
+                  )}
                 </span>
               </div>
 

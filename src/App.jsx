@@ -68,8 +68,8 @@ export default function App() {
   const [useAutoTheme, setUseAutoTheme] = useLocalStorage('mindflow_use_auto_theme', false);
   const [themeSchedule, setThemeSchedule] = useLocalStorage('mindflow_theme_schedule', {
     morning: 'theme-beautiful',
-    afternoon: 'theme-mindful',
-    evening: 'theme-thoughtful',
+    afternoon: 'theme-thoughtful',
+    evening: 'theme-mindful',
     night: 'theme-deepwork'
   });
   const [lastScheduledHourApplied, setLastScheduledHourApplied] = useState(-1);
@@ -309,6 +309,9 @@ export default function App() {
 
     setHistory((prev) => [newSession, ...prev]);
 
+    // FIX 6: Increment Focus Blocks (focusCompleted) counter on session complete
+    setStats(prev => ({ ...prev, focusCompleted: prev.focusCompleted + 1 }));
+
     // Handle Streaks increments
     let nextStreak = streak;
     if (lastSessionDate !== todayStr) {
@@ -346,8 +349,8 @@ export default function App() {
   }, [tasks, stats.tasksCompleted, setStats]);
 
   const addTask = (text, column = 'todo') => {
-    if (!isPro && tasks.length >= 10) {
-      triggerProGating("Task Board limit beyond 10 tasks");
+    if (!isPro && tasks.length >= 20) {
+      triggerProGating("Task Board limit beyond 20 tasks");
       return;
     }
     const newTask = {
@@ -905,7 +908,7 @@ export default function App() {
                 { id: 'dump', label: '🧠 Brain Dump', desc: 'Offload distractions' },
                 { id: 'tasks', label: '📋 Action Tasks', desc: 'Manage flow columns' },
                 { id: 'garden', label: '🏡 Seedling Garden', desc: 'Stats & wiggling seedling' },
-                { id: 'theme', label: '🎨 Custom Wallpaper', desc: 'Upload base64 image' }
+                { id: 'theme', label: '🎨 Custom Wallpaper', desc: 'Upload a photo from your gallery' }
               ].map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (

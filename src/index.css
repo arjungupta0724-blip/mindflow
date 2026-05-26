@@ -385,3 +385,46 @@ h1, h2, h3, h4, .outfit-font {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* FIX 10: Mobile theme color intensity boost — 20% more vivid below 768px */
+@media (max-width: 768px) {
+  .theme-beautiful {
+    --bg-gradient: linear-gradient(135deg, #ede8f5 0%, #ddd7ef 50%, #e8e0f0 100%);
+    --panel-bg: rgba(255, 255, 255, 0.97);
+    --accent: #7a6ab0;
+    --accent-secondary: #8c7a9c;
+    --text-primary: #1e1b20;
+    --text-secondary: #5a5260;
+    --text-muted: #8a8295;
+    --xp-fill: #7a6ab0;
+  }
+
+  .theme-thoughtful {
+    --bg-gradient: radial-gradient(circle at 50% 50%, #2a2218 0%, #120f0a 100%);
+    --panel-bg: rgba(28, 22, 16, 0.92);
+    --accent: #d4b87a;
+    --accent-secondary: #b09060;
+    --text-primary: #f5eee0;
+    --text-secondary: #c9b08e;
+    --xp-fill: #d4b87a;
+  }
+
+  .theme-mindful {
+    --bg-gradient: radial-gradient(circle at 50% 50%, #162018 0%, #080a08 100%);
+    --panel-bg: rgba(18, 26, 21, 0.94);
+    --accent: #6eb880;
+    --accent-secondary: #5a9a6c;
+    --text-primary: #dff0e5;
+    --text-secondary: #88c49a;
+    --xp-fill: #6eb880;
+  }
+
+  .theme-deepwork {
+    --bg-gradient: linear-gradient(135deg, #0a0a0e 0%, #050508 100%);
+    --panel-bg: rgba(12, 12, 16, 0.98);
+    --accent: rgba(240, 245, 255, 0.22);
+    --text-primary: #e8e8f0;
+    --text-secondary: #b0b0bc;
+    --xp-fill: rgba(240, 245, 255, 0.22);
+  }
+}

@@ -52,17 +52,18 @@ export default function IntentionSwitcher({ activeMode, setMode }) {
                 borderRadius: '10px',
                 border: '1px solid',
                 borderColor: isActive ? m.color : 'var(--panel-border)',
-                backgroundColor: isActive ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.15)',
-                color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+                // FIX 9: Solid fill when active, ghost when not
+                backgroundColor: isActive ? m.color : 'transparent',
+                color: isActive ? '#ffffff' : 'var(--text-secondary)',
                 fontSize: '13px',
                 fontWeight: '600',
                 cursor: 'pointer',
                 transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                boxShadow: isActive ? `0 0 10px ${m.color}25` : 'none'
+                boxShadow: isActive ? `0 4px 14px ${m.color}40` : 'none'
               }}
               className="tactile-card"
             >
-              <span style={{ color: isActive ? m.color : 'inherit' }}>{m.icon}</span>
+              <span style={{ color: isActive ? '#ffffff' : m.color }}>{m.icon}</span>
               {m.label}
             </button>
           );

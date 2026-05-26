@@ -209,9 +209,12 @@ export default function ThemeSelector({
               }}
             >
               <Upload size={14} style={{ color: 'var(--accent)' }} />
-              Upload Custom Image
+              Upload a photo from your gallery
               {!isPro && <Lock size={12} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />}
             </button>
+            <span style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3', textAlign: 'center', display: 'block' }}>
+              Supports JPG and PNG images up to 6MB.
+            </span>
             <input 
               type="file" 
               ref={fileInputRef}

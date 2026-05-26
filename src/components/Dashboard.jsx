@@ -497,6 +497,47 @@ export default function Dashboard({
         
         {renderSVGPlant(level)}
 
+        {/* FIX 19: Locked ghost preview of next growth stage */}
+        <div style={{
+          width: '100%',
+          padding: '12px 14px',
+          borderRadius: '12px',
+          border: '1px dashed rgba(255,255,255,0.08)',
+          backgroundColor: 'rgba(0,0,0,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          marginTop: '4px'
+        }}>
+          {/* Ghost silhouette - simplified next stage shape */}
+          <div style={{
+            width: '48px',
+            height: '48px',
+            position: 'relative',
+            flexShrink: 0,
+            opacity: 0.2
+          }}>
+            <svg viewBox="0 0 48 48" width="48" height="48">
+              {/* Generic next-stage plant silhouette */}
+              <rect x="22" y="36" width="4" height="10" rx="2" fill="var(--accent)" />
+              <path d="M24,36 C24,28 18,22 24,14 C30,22 24,28 24,36 Z" fill="var(--accent)" />
+              <path d="M24,24 C24,24 14,20 16,28 C20,26 24,24 24,24 Z" fill="var(--accent)" />
+              <path d="M24,20 C24,20 32,16 34,24 C30,22 24,20 24,20 Z" fill="var(--accent)" />
+            </svg>
+          </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
+              <Lock size={10} style={{ color: 'var(--text-muted)' }} />
+              <span style={{ fontSize: '9px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: '700' }}>
+                Next Stage Locked
+              </span>
+            </div>
+            <span style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+              Level {level + 1} — Keep growing to unlock this
+            </span>
+          </div>
+        </div>
+
         <div style={{ display: 'flex', gap: '10px', width: '100%', justifyContent: 'center' }}>
           <button 
             onClick={handleCanvasShare}
