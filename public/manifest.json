@@ -141,32 +141,6 @@
       "url": "url"
     }
   },
-  "widgets": [
-    {
-      "name": "Focus State",
-      "short_name": "Focus",
-      "description": "View current focus timer status",
-      "tag": "timer-widget",
-      "template": "timer-widget",
-      "ms_ac_template": "/widget-template.json",
-      "data": "/widget-data.json",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ],
-      "screenshots": [
-        {
-          "src": "/screenshot-mobile.png",
-          "sizes": "1024x1024",
-          "type": "image/png",
-          "label": "Mobile Widget Preview"
-        }
-      ]
-    }
-  ],
   "edge_side_panel": {
     "preferred_width": 400
   },
