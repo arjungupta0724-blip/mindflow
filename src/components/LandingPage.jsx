@@ -56,16 +56,16 @@ export default function LandingPage({ onStart }) {
         
         {/* Section 1: Hero Block */}
         <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', position: 'relative' }}>
-          <div style={{ padding: '6px 14px', borderRadius: '99px', backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)' }}>
+          <div className="slide-up-1" style={{ padding: '6px 14px', borderRadius: '99px', backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)' }}>
             <Sparkles size={12} style={{ color: 'var(--accent)' }} />
             <span>Introducing MindFlow 3.0</span>
           </div>
 
-          <h2 className="outfit-font" style={{ fontSize: 'clamp(32px, 6.5vw, 54px)', fontWeight: '800', lineHeight: 1.15, color: '#fff', maxWidth: '750px', letterSpacing: '-0.03em' }}>
+          <h2 className="outfit-font slide-up-2" style={{ fontSize: 'clamp(32px, 6.5vw, 54px)', fontWeight: '800', lineHeight: 1.15, color: '#fff', maxWidth: '750px', letterSpacing: '-0.03em' }}>
             Focus without the noise.<br />Grow without the pressure.
           </h2>
 
-          <p style={{ fontSize: 'clamp(14px, 4vw, 17px)', color: 'rgba(255,255,255,0.6)', maxWidth: '580px', lineHeight: 1.6 }}>
+          <p className="slide-up-3" style={{ fontSize: 'clamp(14px, 4vw, 17px)', color: 'rgba(255,255,255,0.6)', maxWidth: '580px', lineHeight: 1.6 }}>
             A gorgeous, tactile sensory workspace designed to protect neurodivergent minds from cognitive burnout. Flow with gamified timers, plant growth, and programmatically synthesized ambient environments.
           </p>
 
@@ -77,36 +77,45 @@ export default function LandingPage({ onStart }) {
             Start Free — No Account Needed
           </button>
 
-          {/* Frosted App Preview Screenshot Placeholder */}
-          <div 
-            style={{ 
-              width: '100%', 
-              height: '240px', 
-              borderRadius: '20px', 
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+          {/* REAL App Screenshot Hero — Fix 1 */}
+          <div
+            style={{
+              width: '100%',
               marginTop: '40px',
-              position: 'relative',
+              borderRadius: '20px',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
               overflow: 'hidden',
-              background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+              boxShadow: '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)',
+              position: 'relative'
             }}
+            className="slide-up-4"
           >
-            <div style={{ position: 'absolute', inset: '20px', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-              <Sprout size={32} style={{ color: 'rgba(255,255,255,0.2)' }} />
-              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>MindFlow Zen Workspace Frame</span>
-            </div>
-            {/* Matte Backdrop overlay blur */}
-            <div 
+            <img
+              src="/hero-screenshot.png"
+              alt="MindFlow App Preview"
               style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundColor: 'rgba(0,0,0,0.1)',
-                backdropFilter: 'blur(3px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                width: '100%',
+                display: 'block',
+                borderRadius: '20px'
               }}
             />
+            {/* Subtle top gradient overlay so it doesn't look pasted */}
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0,
+              height: '60px',
+              background: 'linear-gradient(180deg, #0c0c12 0%, transparent 100%)',
+              borderRadius: '20px 20px 0 0',
+              pointerEvents: 'none'
+            }} />
+            <div style={{
+              position: 'absolute',
+              bottom: 0, left: 0, right: 0,
+              height: '80px',
+              background: 'linear-gradient(0deg, #0c0c12 0%, transparent 100%)',
+              borderRadius: '0 0 20px 20px',
+              pointerEvents: 'none'
+            }} />
           </div>
         </section>
 

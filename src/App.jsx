@@ -922,17 +922,15 @@ export default function App() {
                       padding: '10px 14px',
                       borderRadius: '10px',
                       border: 'none',
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.06)' : 'transparent',
-                      borderColor: isActive ? 'var(--panel-border-focus)' : 'transparent',
-                      borderWidth: '1px',
-                      borderStyle: 'solid',
+                      backgroundColor: isActive ? 'color-mix(in srgb, var(--accent) 10%, transparent)' : 'transparent',
+                      borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
                       color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
                       textAlign: 'left',
                       cursor: 'pointer',
                       width: '100%',
+                      boxShadow: isActive ? 'var(--accent-glow, none)' : 'none',
                       transition: 'all 0.2s ease'
                     }}
-                    className="tactile-card"
                   >
                     <span style={{ fontSize: '13px', fontWeight: '700' }}>{tab.label}</span>
                     <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{tab.desc}</span>

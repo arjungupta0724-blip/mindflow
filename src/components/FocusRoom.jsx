@@ -692,8 +692,13 @@ export default function FocusRoom({
           </div>
         ) : (
           <div style={{ position: 'relative', width: '200px', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {/* Fix 3: Ambient idle halo */}
+            <div className="focus-idle-halo" />
             <svg style={{ position: 'absolute', width: '180px', height: '180px', transform: 'rotate(-90deg)' }}>
               <circle cx="90" cy="90" r="75" fill="transparent" stroke="rgba(255,255,255,0.03)" strokeWidth="8" />
+              {/* Glowing backdrop ring */}
+              <circle cx="90" cy="90" r="75" fill="transparent" stroke="var(--accent)" strokeWidth="8" strokeDasharray="471.23" strokeDashoffset="0" strokeLinecap="round" style={{ filter: 'blur(6px)', opacity: 0.5 }} />
+              {/* Sharp ring */}
               <circle cx="90" cy="90" r="75" fill="transparent" stroke="var(--accent)" strokeWidth="8" strokeDasharray="471.23" strokeDashoffset="0" strokeLinecap="round" />
             </svg>
             <span className="outfit-font" style={{ fontSize: '36px', fontWeight: '800', color: 'var(--text-primary)' }}>
@@ -830,22 +835,23 @@ export default function FocusRoom({
                 <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700' }}>
                   {category.name}
                 </span>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(135px, 1fr))', gap: '10px', width: '100%' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(145px, 1fr))', gap: '10px', width: '100%' }}>
                   {category.sounds.map((noise) => {
                     const isActive = activeSounds.includes(noise.type);
                     return (
                       <div 
                         key={noise.type} 
+                        className={isActive ? 'sound-active-pulse' : ''}
                         style={{ 
                           display: 'flex', 
                           flexDirection: 'column', 
                           gap: '6px',
-                          padding: '8px',
+                          padding: '10px',
                           borderRadius: '12px',
-                          backgroundColor: isActive ? 'rgba(79, 172, 254, 0.04)' : 'rgba(255,255,255,0.01)',
+                          backgroundColor: isActive ? 'color-mix(in srgb, var(--accent) 8%, transparent)' : 'rgba(255,255,255,0.01)',
                           border: '1px solid',
                           borderColor: isActive ? 'var(--accent)' : 'var(--panel-border)',
-                          transition: 'all 0.2s'
+                          transition: 'all 0.25s cubic-bezier(0.22, 1, 0.36, 1)'
                         }}
                       >
                         <button
@@ -853,13 +859,14 @@ export default function FocusRoom({
                           onClick={() => handleToggleSound(noise.type)}
                           style={{
                             width: '100%',
-                            padding: '6px 4px',
-                            fontSize: '11.5px',
+                            padding: '8px 4px',
+                            fontSize: '12px',
                             border: 'none',
                             background: 'none',
                             color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
                             textAlign: 'center',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            fontWeight: isActive ? '700' : '400'
                           }}
                         >
                           {noise.label}

@@ -158,6 +158,20 @@ h1, h2, h3, h4, .outfit-font {
   position: relative;
   z-index: 1;
   transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+/* Fix 6: Inner frost highlight line — simulates layered glass depth */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 30%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.12) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .glass-panel:hover {
@@ -196,6 +210,14 @@ h1, h2, h3, h4, .outfit-font {
   color: var(--text-primary);
   outline: none;
   width: 100%;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Fix 7: Glowing border + inner glow on focus */
+.sensory-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.05), 0 0 12px color-mix(in srgb, var(--accent) 20%, transparent);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .theme-beautiful .sensory-input {
@@ -403,12 +425,15 @@ h1, h2, h3, h4, .outfit-font {
     background: var(--panel-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border-top: 1px solid var(--panel-border);
+    /* Fix 11: Premium gradient border at top of mobile tab bar */
+    border-top: none;
     padding: 6px 8px;
     padding-bottom: max(6px, env(safe-area-inset-bottom));
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--panel-bg) 0%, transparent) 0%, var(--panel-bg) 8px) padding-box, linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--accent-secondary) 70%, transparent 100%) border-box;
+    border-top: 1px solid transparent;
   }
 
   .mobile-tab-bar button {
@@ -493,6 +518,63 @@ h1, h2, h3, h4, .outfit-font {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* ========================================== */
+/* Fix 4: Stagger slide-up reveal animation   */
+/* ========================================== */
+
+@keyframes slideUpReveal {
+  0% { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up-1 { animation: slideUpReveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.slide-up-2 { animation: slideUpReveal 0.45s 0.07s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.slide-up-3 { animation: slideUpReveal 0.45s 0.14s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.slide-up-4 { animation: slideUpReveal 0.45s 0.21s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ========================================== */
+/* Fix 12: Active soundscape waveform pulse   */
+/* ========================================== */
+
+.sound-active-pulse {
+  animation: soundPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes soundPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 8px color-mix(in srgb, var(--accent) 25%, transparent); }
+  50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 10%, transparent), 0 0 16px color-mix(in srgb, var(--accent) 35%, transparent); }
+}
+
+/* ========================================== */
+/* Fix 9: Standardised typography tokens      */
+/* ========================================== */
+
+:root {
+  --text-3xl: clamp(26px, 4vw, 36px);
+  --text-2xl: clamp(20px, 3vw, 26px);
+  --text-xl: clamp(17px, 2.5vw, 20px);
+  --text-lg: 16px;
+  --text-base: 14px;
+  --text-sm: 12px;
+  --text-xs: 11px;
+  --text-2xs: 10px;
+}
+
+/* Fix 3: Focus Room idle ambient halo behind timer circle */
+.focus-idle-halo {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent) 0%, transparent 65%);
+  pointer-events: none;
+  animation: haloBreath 5s infinite ease-in-out;
+}
+
+@keyframes haloBreath {
+  0%, 100% { opacity: 0.5; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.05); }
 }
 
 /* FIX 10: Mobile theme color intensity boost — 20% more vivid below 768px */

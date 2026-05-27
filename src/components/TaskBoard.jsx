@@ -229,9 +229,31 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
   };
 
   const columns = [
-    { id: 'todo', title: 'Inbox / Ideas', desc: 'Capture thoughts first' },
-    { id: 'active', title: 'In Progress', desc: 'Up to 3 active tasks', isCap: true },
-    { id: 'done', title: 'Accomplished', desc: 'Dopamine Bank' }
+    { 
+      id: 'todo', 
+      title: 'Inbox / Ideas', 
+      desc: 'Capture thoughts first',
+      accentColor: 'rgba(79, 172, 254, 0.7)',
+      tintBg: 'rgba(79, 172, 254, 0.03)',
+      icon: '📥'
+    },
+    { 
+      id: 'active', 
+      title: 'In Progress', 
+      desc: 'Up to 3 active tasks', 
+      isCap: true,
+      accentColor: 'rgba(255, 183, 77, 0.7)',
+      tintBg: 'rgba(255, 183, 77, 0.03)',
+      icon: '⚡'
+    },
+    { 
+      id: 'done', 
+      title: 'Accomplished', 
+      desc: 'Dopamine Bank',
+      accentColor: 'rgba(102, 187, 106, 0.7)',
+      tintBg: 'rgba(102, 187, 106, 0.03)',
+      icon: '✅'
+    }
   ];
 
   return (
@@ -304,20 +326,32 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
               key={col.id} 
               className="glass-panel" 
               style={{ 
-                padding: '20px', 
+                padding: '0',
                 minHeight: '400px', 
                 display: 'flex', 
                 flexDirection: 'column', 
-                gap: '16px',
-                borderColor: isFull ? 'rgba(255, 230, 0, 0.25)' : 'var(--panel-border)'
+                gap: '0',
+                borderColor: isFull ? 'rgba(255, 230, 0, 0.25)' : 'var(--panel-border)',
+                overflow: 'hidden'
               }}
             >
+              {/* Fix 8: Coloured top stripe */}
+              <div style={{
+                height: '3px',
+                background: `linear-gradient(90deg, ${col.accentColor}, transparent)`,
+                width: '100%'
+              }} />
+
+              <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', flex: 1, backgroundColor: col.tintBg }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h3 className="outfit-font" style={{ fontSize: '18px', color: 'var(--text-primary)' }}>
-                    {col.title}
-                  </h3>
-                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{col.desc}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '16px' }}>{col.icon}</span>
+                  <div>
+                    <h3 className="outfit-font" style={{ fontSize: '16px', color: 'var(--text-primary)' }}>
+                      {col.title}
+                    </h3>
+                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{col.desc}</span>
+                  </div>
                 </div>
                 <span 
                   className="outfit-font"
@@ -527,8 +561,9 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
                     );
                   })
                 )}
-              </div>
+              </div>{/* end task items list */}
 
+              </div>{/* end inner tintBg container */}
             </div>
           );
         })}

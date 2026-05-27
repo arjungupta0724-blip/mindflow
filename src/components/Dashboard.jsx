@@ -55,16 +55,29 @@ export default function Dashboard({
       : 'rgba(0,0,0,0.15)';
 
     return (
-      <div style={{ position: 'relative', width: '100%', maxWidth: '240px' }}>
+      <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
+        {/* Fix 2: Ambient environmental glow behind the plant */}
+        <div style={{
+          position: 'absolute',
+          inset: '10%',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          zIndex: 0,
+          filter: 'blur(20px)',
+          animation: 'haloBreath 5s infinite ease-in-out'
+        }} />
         <svg 
           viewBox="0 0 200 200" 
           style={{ 
             width: '100%', 
-            maxHeight: '200px', 
+            maxHeight: '280px',
             background: skyBackground,
             borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.03)',
-            padding: '8px'
+            border: '1px solid rgba(255,255,255,0.04)',
+            padding: '8px',
+            position: 'relative',
+            zIndex: 1
           }}
         >
           {/* Terracotta Pot */}
@@ -550,30 +563,24 @@ export default function Dashboard({
         </div>
       </div>
 
-      {/* Focus counters & Daily Streaks */}
+      {/* Focus counters & Daily Streaks — Fix 10: Big numbers */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
-        <div className="glass-panel" style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Flame size={16} style={{ color: '#ff5e62' }} />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Day Streak 🔥</span>
-            <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>{streak} Days</span>
-          </div>
+        <div className="glass-panel slide-up-2" style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', textAlign: 'center' }}>
+          <span style={{ fontSize: '28px' }}>🔥</span>
+          <span className="outfit-font" style={{ fontSize: '28px', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1 }}>{streak}</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px' }}>Day Streak</span>
         </div>
         
-        <div className="glass-panel" style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Hourglass size={16} style={{ color: 'var(--accent)' }} />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Sessions Done 📚</span>
-            <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>{stats.focusCompleted}</span>
-          </div>
+        <div className="glass-panel slide-up-3" style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', textAlign: 'center' }}>
+          <span style={{ fontSize: '28px' }}>📚</span>
+          <span className="outfit-font" style={{ fontSize: '28px', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1 }}>{stats.focusCompleted}</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px' }}>Sessions Done</span>
         </div>
 
-        <div className="glass-panel" style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <CheckCircle size={16} style={{ color: '#4caf50' }} />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '9px', color: 'var(--text-muted)' }}>Thoughts Cleared 🧹</span>
-            <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>{stats.tasksCompleted}</span>
-          </div>
+        <div className="glass-panel slide-up-4" style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', textAlign: 'center' }}>
+          <span style={{ fontSize: '28px' }}>🧹</span>
+          <span className="outfit-font" style={{ fontSize: '28px', fontWeight: '800', color: 'var(--text-primary)', lineHeight: 1 }}>{stats.tasksCompleted}</span>
+          <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px' }}>Thoughts Cleared</span>
         </div>
       </div>
 
