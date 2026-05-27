@@ -9,20 +9,23 @@
   --bg-gradient: linear-gradient(135deg, #f5f3f0 0%, #ebe7e0 100%);
   --glow-1: rgba(180, 160, 150, 0.04);
   --glow-2: rgba(150, 155, 170, 0.04);
-  --panel-bg: rgba(255, 255, 255, 0.94);
-  --panel-border: rgba(30, 25, 20, 0.07);
+  --panel-bg: rgba(255, 255, 255, 0.72);
+  --panel-border: rgba(30, 25, 20, 0.05);
   --panel-border-focus: rgba(30, 25, 20, 0.16);
   --text-primary: #2d2a26;
   --text-secondary: #6e675f;
   --text-muted: #9e978d;
   --accent: #8e8072;
   --accent-secondary: #a39281;
-  --accent-glow: none; /* No shiny neon glows! */
+  --accent-glow: 0 0 15px rgba(142, 128, 114, 0.15);
   --success: #6e8477;
   --warning: #bda287;
-  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-bg: rgba(255, 255, 255, 0.65);
   --xp-bar-bg: rgba(0, 0, 0, 0.04);
   --xp-fill: #8e8072;
+  --blob-opacity: 0.04;
+  --panel-shadow: 0 12px 30px rgba(30, 25, 20, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --panel-glow: 0 0 20px rgba(142, 128, 114, 0.02);
 }
 
 /* Theme 2: Thoughtful (Sand & Terracotta) - Grounding Sepia Matte Dark Mode */
@@ -30,7 +33,7 @@
   --bg-gradient: radial-gradient(circle at 50% 50%, #1c1815 0%, #0f0c0a 100%);
   --glow-1: rgba(223, 175, 112, 0.02);
   --glow-2: rgba(212, 175, 55, 0.01);
-  --panel-bg: rgba(22, 18, 15, 0.85);
+  --panel-bg: rgba(22, 18, 15, 0.78);
   --panel-border: rgba(255, 255, 255, 0.04);
   --panel-border-focus: rgba(223, 175, 112, 0.22);
   --text-primary: #f2ede4;
@@ -38,12 +41,15 @@
   --text-muted: #7c6c5a;
   --accent: #c2aa8a;
   --accent-secondary: #9c8466;
-  --accent-glow: none;
+  --accent-glow: 0 0 25px rgba(223, 175, 112, 0.35);
   --success: #9fa89f;
   --warning: #d4a373;
-  --card-bg: rgba(32, 26, 22, 0.6);
+  --card-bg: rgba(32, 26, 22, 0.45);
   --xp-bar-bg: rgba(255, 255, 255, 0.03);
   --xp-fill: #c2aa8a;
+  --blob-opacity: 0.22;
+  --panel-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --panel-glow: 0 0 25px rgba(223, 175, 112, 0.07);
 }
 
 /* Theme 3: Mindful (Sage & Eucalyptus) - Quiet Organic Low-Sensory Dark Mode */
@@ -51,7 +57,7 @@
   --bg-gradient: radial-gradient(circle at 50% 50%, #121815 0%, #070908 100%);
   --glow-1: rgba(129, 199, 132, 0.02);
   --glow-2: rgba(143, 188, 139, 0.01);
-  --panel-bg: rgba(18, 24, 21, 0.88);
+  --panel-bg: rgba(18, 24, 21, 0.78);
   --panel-border: rgba(255, 255, 255, 0.03);
   --panel-border-focus: rgba(129, 199, 132, 0.2);
   --text-primary: #e2ede6;
@@ -59,12 +65,15 @@
   --text-muted: #5e7365;
   --accent: #8eab97;
   --accent-secondary: #74917d;
-  --accent-glow: none;
+  --accent-glow: 0 0 25px rgba(129, 199, 132, 0.3);
   --success: #74917d;
   --warning: #c2a88e;
-  --card-bg: rgba(22, 31, 26, 0.55);
+  --card-bg: rgba(22, 31, 26, 0.42);
   --xp-bar-bg: rgba(255, 255, 255, 0.02);
   --xp-fill: #8eab97;
+  --blob-opacity: 0.20;
+  --panel-shadow: 0 20px 45px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  --panel-glow: 0 0 25px rgba(129, 199, 132, 0.06);
 }
 
 /* Theme 4: Deep Work (Obsidian & Graphite) - Matte Dark Mode Focus */
@@ -72,7 +81,7 @@
   --bg-gradient: linear-gradient(135deg, #0d0d0f 0%, #060608 100%);
   --glow-1: rgba(255, 255, 255, 0.01);
   --glow-2: rgba(255, 255, 255, 0.01);
-  --panel-bg: rgba(15, 15, 17, 0.96);
+  --panel-bg: rgba(15, 15, 17, 0.85);
   --panel-border: rgba(255, 255, 255, 0.04);
   --panel-border-focus: rgba(255, 255, 255, 0.15);
   --text-primary: #e1e1e6;
@@ -80,12 +89,15 @@
   --text-muted: #515156;
   --accent: rgba(240, 245, 255, 0.15);
   --accent-secondary: rgba(240, 245, 255, 0.08);
-  --accent-glow: none;
+  --accent-glow: 0 0 30px rgba(240, 245, 255, 0.25);
   --success: rgba(240, 245, 255, 0.12);
   --warning: rgba(240, 245, 255, 0.10);
-  --card-bg: rgba(22, 22, 26, 0.7);
+  --card-bg: rgba(22, 22, 26, 0.5);
   --xp-bar-bg: rgba(255, 255, 255, 0.02);
   --xp-fill: rgba(240, 245, 255, 0.15);
+  --blob-opacity: 0.08;
+  --panel-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  --panel-glow: 0 0 30px rgba(240, 245, 255, 0.03);
 }
 
 /* ========================================== */
@@ -138,13 +150,14 @@ h1, h2, h3, h4, .outfit-font {
 
 .glass-panel {
   background: var(--panel-bg);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
   border: 1px solid var(--panel-border);
   border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--panel-shadow, 0 15px 35px rgba(0, 0, 0, 0.18)), var(--panel-glow, none);
   position: relative;
   z-index: 1;
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .glass-panel:hover {
@@ -522,5 +535,51 @@ h1, h2, h3, h4, .outfit-font {
     --text-primary: #e8e8f0;
     --text-secondary: #b0b0bc;
     --xp-fill: rgba(240, 245, 255, 0.22);
+  }
+}
+
+/* ========================================== */
+/* 7. HIGH-FIDELITY AMBIENT GLOWING BLOBS     */
+/* ========================================== */
+
+.ambient-glowing-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  -webkit-filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--blob-opacity, 0.12);
+  transition: background-color 1.5s ease, opacity 1.5s ease;
+  animation: floatBlob 22s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+  top: -12%;
+  right: -8%;
+  width: 55vw;
+  height: 55vw;
+  background-color: var(--accent);
+}
+
+.blob-2 {
+  bottom: -15%;
+  left: -12%;
+  width: 60vw;
+  height: 60vw;
+  background-color: var(--accent-secondary);
+  animation-delay: -7s;
+  animation-duration: 28s;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(6%, 5%) scale(1.1) rotate(90deg);
+  }
+  100% {
+    transform: translate(-4%, -6%) scale(0.92) rotate(180deg);
   }
 }

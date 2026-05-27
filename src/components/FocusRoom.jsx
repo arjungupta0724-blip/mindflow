@@ -559,8 +559,11 @@ export default function FocusRoom({
         ) : (
           <div style={{ position: 'relative', width: '340px', height: '340px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="timer-running">
             <div className="timer-pulse-layer"></div>
-            <svg style={{ position: 'absolute', width: '320px', height: '320px', transform: 'rotate(-90deg)' }}>
+            <svg style={{ position: 'absolute', width: '320px', height: '320px', transform: 'rotate(-90deg)', filter: 'drop-shadow(0 0 16px rgba(0,0,0,0.25))' }}>
               <circle cx="160" cy="160" r="140" fill="transparent" stroke="rgba(255,255,255,0.03)" strokeWidth="12" />
+              {/* Glowing fuzzy backdrop stroke */}
+              <circle cx="160" cy="160" r="140" fill="transparent" stroke="var(--accent)" strokeWidth="12" strokeDasharray={strokeDash} strokeDashoffset={strokeOffset} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.5s linear', filter: 'blur(8px)', opacity: 0.6 }} />
+              {/* Sharp top-layer focus stroke */}
               <circle cx="160" cy="160" r="140" fill="transparent" stroke="var(--accent)" strokeWidth="12" strokeDasharray={strokeDash} strokeDashoffset={strokeOffset} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.5s linear' }} />
             </svg>
             <div style={{ zIndex: 2 }}>
