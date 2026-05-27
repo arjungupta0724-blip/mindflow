@@ -215,8 +215,8 @@ export default function FocusRoom({
 
           secondsRef.current += 1;
           if (secondsRef.current >= 60) {
-            addXp(1); // +1 XP per active minute
-            playClick();
+            addXp(1); // +1 XP per active minute — H5: no toast, silence mid-session noise
+            // playClick() removed: too distracting mid-session
             secondsRef.current = 0;
           }
 
@@ -667,10 +667,20 @@ export default function FocusRoom({
         </div>
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
+      {/* H4: Two-column desktop layout — timer+settings left, sounds right */}
+      <div style={{ 
+        display: 'grid',
+        gridTemplateColumns: 'minmax(280px, 360px) 1fr',
+        gap: '32px',
+        alignItems: 'start',
+        width: '100%'
+      }} className="focus-room-grid">
+        
+        {/* LEFT COLUMN: Header, timer dial, duration picker, start button */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
         
         {/* Header */}
-        <div>
+        <div style={{ textAlign: 'center' }}>
           <h2 style={{ fontSize: '28px', marginBottom: '4px', color: 'var(--text-primary)' }}>
             {mode === 'meditate' ? 'Zen Meditation' : 'Focus Room'}
           </h2>
@@ -788,21 +798,18 @@ export default function FocusRoom({
             <Play size={18} />
             {mode === 'meditate' ? 'Start Zen Session' : 'Enter Focal Flow'}
           </button>
-        </div>
+        </div>{/* end left column */}
 
-        {/* Multi-Track Mixer Section */}
+        {/* RIGHT COLUMN: Multi-Track Mixer */}
         <div 
           style={{ 
-            marginTop: '12px',
-            paddingTop: '24px', 
-            borderTop: '1px solid var(--panel-border)',
             width: '100%',
             display: 'flex', 
             flexDirection: 'column', 
-            gap: '16px' 
+            gap: '16px',
+            paddingTop: '4px'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Volume2 size={16} style={{ color: 'var(--accent)' }} />
               <span className="outfit-font" style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)' }}>

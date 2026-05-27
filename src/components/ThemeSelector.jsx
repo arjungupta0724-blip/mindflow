@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Palette, Check, Upload, X, Lock } from 'lucide-react';
 import { playClick, playSuccess } from './SoundSynthesizer';
 
@@ -75,12 +75,14 @@ export default function ThemeSelector({
     playClick();
   };
 
+  const [uploadError, setUploadError] = useState('');
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Elevated file size limit to 6.5MB to support standard smartphone camera shots!
+      setUploadError('');
       if (file.size > 6500000) {
-        alert("🚨 Please choose a wallpaper image under 6MB so it fits smoothly in local trial memory! In the production cloud build, this will be unlimited.");
+        setUploadError('⚠️ Please choose an image under 6MB.');
         return;
       }
 
@@ -212,7 +214,12 @@ export default function ThemeSelector({
               Upload a photo from your gallery
               {!isPro && <Lock size={12} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />}
             </button>
-            <span style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3', textAlign: 'center', display: 'block' }}>
+            {uploadError && (
+              <span style={{ fontSize: '11px', color: '#ff5e62', marginTop: '6px', display: 'block', textAlign: 'center' }}>
+                {uploadError}
+              </span>
+            )}
+            <span style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3', textAlign: 'center', display: 'block', marginTop: '4px' }}>
               Supports JPG and PNG images up to 6MB.
             </span>
             <input 
@@ -285,6 +292,7 @@ export default function ThemeSelector({
         </div>
 
         <textarea
+          className="sensory-input"
           value={customAffirmations}
           onChange={(e) => setCustomAffirmations(e.target.value)}
           placeholder={`Focus on the breath.\nOne step at a time.\nI am doing enough.`}
@@ -294,12 +302,7 @@ export default function ThemeSelector({
             padding: '8px 10px',
             fontSize: '12px',
             borderRadius: '8px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            backgroundColor: 'rgba(0, 0, 0, 0.15)',
-            color: 'var(--text-primary)',
             resize: 'vertical',
-            outline: 'none',
-            fontFamily: 'inherit',
             lineHeight: '1.4'
           }}
         />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Play, ShieldAlert, Heart, Volume2, Sprout } from 'lucide-react';
+import { Sparkles, Play, ShieldAlert, Heart, Volume2 } from 'lucide-react';
 import { playClick } from './SoundSynthesizer';
 
 /**

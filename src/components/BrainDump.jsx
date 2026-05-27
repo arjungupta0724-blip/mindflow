@@ -99,12 +99,12 @@ export default function BrainDump({ addTask }) {
         className="sensory-input"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="💡 Type random thoughts, ideas, or distractions here...&#10;Press Enter for a new line."
+        placeholder={`💡 Type random thoughts, ideas, or distractions here...\nPress Enter for a new line.`}
         style={{
-          minHeight: '110px',
+          minHeight: '160px',
           resize: 'vertical',
           fontFamily: 'inherit',
-          lineHeight: '1.5',
+          lineHeight: '1.6',
           fontSize: '14px',
           borderColor: text ? 'rgba(79, 172, 254, 0.25)' : 'var(--panel-border)'
         }}

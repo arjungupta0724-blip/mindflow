@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, BrainCircuit, Heart, LogOut, HelpCircle, MessageSquare, Lock, X } from 'lucide-react';
+import { Sparkles, BrainCircuit, Heart, LogOut, HelpCircle, MessageSquare, Lock, X, ShieldCheck } from 'lucide-react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import Dashboard from './components/Dashboard';
 import FocusRoom from './components/FocusRoom';
@@ -81,6 +81,7 @@ export default function App() {
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const [showIntentionPrompt, setShowIntentionPrompt] = useState(false);
   const [intentionInput, setIntentionInput] = useState('');
+  const [showSignOutConfirm, setShowSignOutConfirm] = useState(false); // C2: custom sign-out modal
 
   // Interactive Level Up Celebrations
   const [prevLevel, setPrevLevel] = useState(level);
@@ -232,13 +233,15 @@ export default function App() {
     }
   }, [lastSessionDate]);
 
-  // Daily Intention Takeover Check-in
+  // Daily Intention Takeover Check-in — H3 fix: only show if today not answered, H9: null guard
   useEffect(() => {
+    if (!user) return; // H9: null guard
     const todayStr = new Date().toISOString().split('T')[0];
-    if (user && dailyIntention.date !== todayStr) {
+    // H3: Only show if not already answered today
+    if (dailyIntention.date !== todayStr && !showIntentionPrompt) {
       setShowIntentionPrompt(true);
     }
-  }, [user, dailyIntention.date]);
+  }, [user]); // Only re-check when user logs in
 
   // Handle Global Keyboard Shortcuts
   useEffect(() => {
@@ -366,10 +369,15 @@ export default function App() {
   };
 
   const handleSignOut = () => {
-    if (window.confirm("Are you sure you want to sign out? Your local tasks and seedling stats will remain saved on this browser!")) {
-      setUser(null);
-      playClick();
-    }
+    // C2: Replace window.confirm() with custom styled modal
+    setShowSignOutConfirm(true);
+    playClick();
+  };
+
+  const confirmSignOut = () => {
+    setUser(null);
+    setShowSignOutConfirm(false);
+    playClick();
   };
 
   const triggerConfetti = () => {
@@ -415,10 +423,8 @@ export default function App() {
     showToastMessage("🎯 Daily anchor set! Keep it in focus.");
   };
 
-  // 1. Landing Page presentation frame
-  if (!hasVisitedBefore) {
-    return <LandingPage onStart={() => setHasVisitedBefore(true)} />;
-  }
+  // 1. Landing Page — H2: Skip double-funnel, go straight to WelcomePortal
+  // New users land directly on WelcomePortal which has full marketing + signup
 
   // 2. Auth welcome selector
   if (!user) {
@@ -485,7 +491,7 @@ export default function App() {
             alignItems: 'center',
             gap: '10px',
             borderColor: 'var(--accent)',
-            boxShadow: '0 0 20px rgba(0, 242, 254, 0.4)',
+            boxShadow: 'var(--accent-glow)',
             animation: 'bloomPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
           }}
         >
@@ -503,7 +509,14 @@ export default function App() {
         <OnboardingModal 
           theme={theme} 
           setTheme={setTheme} 
-          onComplete={() => setHasOnboarded(true)} 
+          onComplete={(brainDumpText) => {
+            setHasOnboarded(true);
+            // H7: Save brain dump text from onboarding step 2 to tasks
+            if (brainDumpText && brainDumpText.trim()) {
+              addTask(brainDumpText.trim(), 'todo');
+              showToastMessage('💡 Your thought was saved to Brain Dump!');
+            }
+          }} 
         />
       )}
 
@@ -529,7 +542,7 @@ export default function App() {
               🎯 Morning Focus Anchor
             </h3>
             <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              What is the **one thing** that would make today feel complete?
+            What is the <strong>one thing</strong> that would make today feel complete?
             </p>
             <input 
               type="text" 
@@ -666,10 +679,10 @@ export default function App() {
               <Lock size={20} />
             </div>
             <h3 className="outfit-font" style={{ fontSize: '18px', color: 'var(--text-primary)', fontWeight: '800' }}>
-              Unlock Gated Feature
+              This grows in Pro 🌱
             </h3>
             <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-              <strong>{proModal.feature}</strong> is a premium MindFlow Pro feature. Pro updates are coming soon. Join the waitlist to be notified:
+              <strong>{proModal.feature}</strong> unlocks when MindFlow Pro launches. Join the waitlist and be first in line:
             </p>
             <input 
               type="email"
@@ -858,8 +871,8 @@ export default function App() {
                 <h1 className="outfit-font" style={{ fontSize: '20px', color: 'var(--text-primary)', lineHeight: 1 }}>
                   MindFlow
                 </h1>
-                <span style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Sensory Workspace
+                <span style={{ fontSize: '10px', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700' }}>
+                  Lv.{level} · {xp % 100} / 100 XP
                 </span>
               </div>
             </div>
@@ -923,6 +936,8 @@ export default function App() {
                       borderRadius: '10px',
                       border: 'none',
                       backgroundColor: isActive ? 'color-mix(in srgb, var(--accent) 10%, transparent)' : 'transparent',
+                      /* M12 fallback */ 
+                      backgroundColor: isActive ? 'rgba(79, 172, 254, 0.08)' : 'transparent',
                       borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
                       color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
                       textAlign: 'left',
@@ -931,6 +946,7 @@ export default function App() {
                       boxShadow: isActive ? 'var(--accent-glow, none)' : 'none',
                       transition: 'all 0.2s ease'
                     }}
+                    className="tactile-card"
                   >
                     <span style={{ fontSize: '13px', fontWeight: '700' }}>{tab.label}</span>
                     <span style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{tab.desc}</span>
@@ -1098,7 +1114,7 @@ export default function App() {
       {!timerRunning && (
         <button
           onClick={() => { playClick(); setShowFeedback(true); }}
-          className="sensory-button-secondary"
+          className="sensory-button-secondary feedback-float-btn"
           style={{
             position: 'fixed',
             bottom: '24px',
@@ -1118,6 +1134,49 @@ export default function App() {
         >
           <MessageSquare size={18} />
         </button>
+      )}
+
+      {/* C2: Custom sign-out confirmation modal */}
+      {showSignOutConfirm && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0,0,0,0.65)',
+            backdropFilter: 'blur(30px)',
+            zIndex: 99999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '24px'
+          }}
+        >
+          <div className="glass-panel" style={{ maxWidth: '360px', width: '100%', padding: '32px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '16px', animation: 'bloomPop 0.35s ease-out' }}>
+            <div style={{ fontSize: '36px' }}>🌱</div>
+            <h3 className="outfit-font" style={{ fontSize: '20px', color: 'var(--text-primary)', fontWeight: '800' }}>
+              Sign out of MindFlow?
+            </h3>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              Your tasks, sessions, and seedling progress are saved right here in your browser. You can sign back in anytime.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '4px' }}>
+              <button
+                onClick={confirmSignOut}
+                className="sensory-button"
+                style={{ width: '100%', padding: '12px', color: 'rgba(255,80,80,0.9)' }}
+              >
+                Yes, sign me out
+              </button>
+              <button
+                onClick={() => setShowSignOutConfirm(false)}
+                className="sensory-button-secondary"
+                style={{ width: '100%', border: 'none' }}
+              >
+                Stay in MindFlow
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* FIX 2: Floating "I'm Overwhelmed" pill button — always visible */}

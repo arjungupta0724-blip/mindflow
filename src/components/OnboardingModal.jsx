@@ -21,13 +21,13 @@ export default function OnboardingModal({ theme, setTheme, onComplete }) {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      onComplete();
+      onComplete(brainDumpText.trim());
     }
   };
 
   const handleSkip = () => {
     playClick();
-    onComplete();
+    onComplete('');
   };
 
   return (
@@ -67,24 +67,38 @@ export default function OnboardingModal({ theme, setTheme, onComplete }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Sparkles size={16} style={{ color: 'var(--accent)' }} />
             <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700' }}>
-              Mindflow Onboarding • Step {step} of 3
+              Welcome to MindFlow
             </span>
           </div>
-          <button 
-            onClick={handleSkip}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'var(--text-muted)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '4px'
-            }}
-            title="Skip Onboarding"
-          >
-            <X size={16} />
-          </button>
+          {/* L5: Visual step progress dots */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', gap: '6px' }}>
+              {[1, 2, 3].map(s => (
+                <div key={s} style={{
+                  width: s === step ? '18px' : '7px',
+                  height: '7px',
+                  borderRadius: '99px',
+                  backgroundColor: s <= step ? 'var(--accent)' : 'rgba(255,255,255,0.12)',
+                  transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)'
+                }} />
+              ))}
+            </div>
+            <button 
+              onClick={handleSkip}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '4px'
+              }}
+              title="Skip Onboarding"
+            >
+              <X size={16} />
+            </button>
+          </div>
         </div>
 
         {/* Dynamic Content */}

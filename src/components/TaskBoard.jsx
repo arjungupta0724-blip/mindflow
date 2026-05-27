@@ -85,11 +85,15 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
     playClick();
   };
 
+  const [showCapWarning, setShowCapWarning] = useState(false);
+
   const moveTask = (id, newStatus) => {
     if (newStatus === 'active') {
       const activeCount = tasks.filter(t => t.status === 'active').length;
       if (activeCount >= 3) {
-        alert("🚨 Active Flow is capped at 3 tasks to prevent cognitive overwhelm! Focus on these or move them back to Inbox first.");
+        setShowCapWarning(true);
+        setTimeout(() => setShowCapWarning(false), 3500);
+        playClick();
         return;
       }
     }
@@ -386,6 +390,21 @@ export default function TaskBoard({ tasks, setTasks, addXp, triggerConfetti, isP
                   )}
                 </span>
               </div>
+
+              {/* Inline cap warning banner for Active Flow */}
+              {col.isCap && showCapWarning && (
+                <div style={{
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(255, 183, 77, 0.1)',
+                  border: '1px solid rgba(255, 183, 77, 0.3)',
+                  fontSize: '12px',
+                  color: 'var(--accent-secondary)',
+                  animation: 'bloomPop 0.3s ease-out'
+                }}>
+                  ⚡ Cap at 3 — finish one before adding more!
+                </div>
+              )}
 
               {/* Task Items */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
