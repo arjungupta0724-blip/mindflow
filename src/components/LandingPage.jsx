@@ -77,6 +77,33 @@ export default function LandingPage({ onStart }) {
             Start Free — No Account Needed
           </button>
 
+          {/* Product Hunt Badge Link */}
+          <a 
+            href="https://www.producthunt.com/posts/mindflow-focus-without-the-noise"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '6px 16px',
+              borderRadius: '99px',
+              backgroundColor: 'rgba(255, 255, 255, 0.02)',
+              border: '1px solid rgba(255, 97, 84, 0.25)',
+              fontSize: '12px',
+              color: 'rgba(255, 255, 255, 0.8)',
+              textDecoration: 'none',
+              marginTop: '4px',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 97, 84, 0.05)'; e.currentTarget.style.borderColor = '#ff6154'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)'; e.currentTarget.style.borderColor = 'rgba(255, 97, 84, 0.25)'; }}
+          >
+            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ff6154' }}></span>
+            <span>Support us on Product Hunt (Launch in 21h)</span>
+          </a>
+
+
           {/* REAL App Screenshot Hero — Fix 1 */}
           <div
             style={{
@@ -220,6 +247,60 @@ export default function LandingPage({ onStart }) {
         <span>Created with love for high-efficiency workspaces</span>
         <Heart size={10} style={{ color: 'var(--accent)' }} />
       </footer>
+
+      {/* Product Hunt Floating Badge */}
+      <a 
+        href="https://www.producthunt.com/posts/mindflow-focus-without-the-noise" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          padding: '10px 16px',
+          borderRadius: '99px',
+          backgroundColor: 'rgba(255, 97, 84, 0.08)',
+          border: '1px solid rgba(255, 97, 84, 0.3)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          textDecoration: 'none',
+          color: '#fff',
+          zIndex: 1000,
+          boxShadow: '0 8px 32px rgba(255, 97, 84, 0.15)',
+          transition: 'all 0.3s ease',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 97, 84, 0.12)'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 97, 84, 0.08)'; e.currentTarget.style.transform = 'scale(1)'; }}
+      >
+        {/* Product Hunt P Icon */}
+        <div style={{
+          width: '28px',
+          height: '28px',
+          borderRadius: '50%',
+          backgroundColor: '#ff6154',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 'bold',
+          fontSize: '15px',
+          color: '#fff',
+          fontFamily: "'Inter', sans-serif"
+        }}>
+          P
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <span style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.6)', fontWeight: 'bold' }}>
+            Featured on
+          </span>
+          <span className="outfit-font" style={{ fontSize: '13px', fontWeight: '700', color: '#ff6154' }}>
+            Product Hunt
+          </span>
+        </div>
+      </a>
     </div>
   );
 }
